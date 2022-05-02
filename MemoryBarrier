@@ -1,4 +1,4 @@
-// 하드웨어에서 최적화하여 임의로 코드를 재배치함
+// 하드웨어에서 프로그램의 의미가 달라지지않은 한에서 성능을 위해 임의로 코드를 재배치함
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -8,7 +8,10 @@ namespace ServerCore
     // 메모리 배리어
     // A) 코드 재배치 억제
     // B) 가시성
-
+    // 메모리 가시성 :  다중 코어에서의 메모리 아키텍처, 캐쉬와 레지스터의 존재 및 컴파일러 성능 최적화에 따른 재배치 현상으로 인하여
+    //                 일부 상태의 업데이트(쓰기) 작업은 작업을 실행하는 쓰레드 외에 다른 쓰레드에게는 상태의 변경이 보이지 않는 상황이 발생하는 지 여부
+    
+    
     // 1) Full Memory Brrier (ASM MFENCE, C# Thread.MemoryBarrier) : Store/Load 둘다 막는다
     // 2) Store Memory Barrier (ASM SFENCE) : Store만 막는다
     // 3) Load Memory Barrier (ASM LFENCE) : Load만 막는다
